@@ -33,9 +33,9 @@
     "format:all": "npm-run-all -p prettier:fix -s eslint:fix"
   },
   "lint-staged": {
-    "*.{js,wxs,ts,tsx,jsx}": [
-      "yarn run prettier:fix",
-      "yarn run eslint:fix"
+    "*.{json,css,sass,scss,ts,jsx,tsx}": [
+      "prettier --config .prettierrc.json --write",
+      "eslint --fix --ext ./**/*.{ts,jsx,tsx}"
     ],
     "*.{json,wxml,axml,css,wxss,acss,wxml,axml,less,scss}": "prettier --config .prettierrc.json --write"
   },
