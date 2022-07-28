@@ -1,11 +1,10 @@
-import Taro from "@tarojs/taro";
-
+import Taro from '@tarojs/taro'
 
 /**
  * 设置 系统 本地存储
- * @param {Object} systemInfo 
+ * @param {Object} systemInfo
  */
-export const setSystem = (systemInfo) => {
+export const setSystem = systemInfo => {
   Taro.setStorageSync('system', JSON.stringify(systemInfo))
 }
 
@@ -19,9 +18,9 @@ export const getSystem = () => {
 
 /**
  * 设置 小程序 本地存储
- * @param {Object} systemInfo 
+ * @param {Object} systemInfo
  */
-export const setAccountInfo = (systemInfo) => {
+export const setAccountInfo = systemInfo => {
   Taro.setStorageSync('accountInfo', JSON.stringify(systemInfo))
 }
 
@@ -35,9 +34,9 @@ export const getAccountInfo = () => {
 
 /**
  *  设置 参数本地存储
- * @param {Object} info 
+ * @param {Object} info
  */
-export const setParam = (info:Object) => {
+export const setParam = (info: Object) => {
   Taro.setStorageSync('params', JSON.stringify(info))
 }
 
@@ -46,5 +45,5 @@ export const setParam = (info:Object) => {
  */
 export const getParam = () => {
   const res = Taro.getStorageSync('params') || null
-  return res?JSON.parse(res):null
+  return res ? JSON.parse(res) : null
 }

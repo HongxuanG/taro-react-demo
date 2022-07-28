@@ -28,14 +28,9 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "eslint": "eslint ./ --ext .{ts,jsx,tsx}",
-    "eslint:fix": "eslint --fix ./ --ext .{ts,jsx,tsx}",
-    "prettier:fix": "prettier --config .prettierrc.json --write './**/*.{json,css,sass,scss,ts,jsx,tsx}'",
+    "eslint:fix": "eslint --fix --ext ./**/*.{ts,jsx,tsx}",
+    "prettier:fix": "prettier --config .prettierrc.json --write ./**/*.{json,css,sass,scss,ts,jsx,tsx}",
     "format:all": "npm-run-all -p prettier:fix -s eslint:fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn run format:all"
-    }
   },
   "lint-staged": {
     "*.{js,wxs,ts,tsx,jsx}": [

@@ -1,9 +1,8 @@
-
-$color_bg_one: #F8F8F8;
-$color_font_one: #3C3C3C;
-$color_font_two: #ABABAB;
+$color_bg_one: #f8f8f8;
+$color_font_one: #3c3c3c;
+$color_font_two: #ababab;
 $color_font_three: #707070;
-$color_main: #007AFF;
+$color_main: #007aff;
 
 $font_size_big: 32px;
 $font_size: 28px;
@@ -12,22 +11,18 @@ $font_size_min: 22px;
 
 //安全底部距离
 .common_safe_area_y {
-    width: 100%;
-    height: constant(safe-area-inset-bottom); /* 兼容 iOS < 11.2 */
-    height: env(safe-area-inset-bottom); /* 兼容 iOS >= 11.2 */
+  width: 100%;
+  height: constant(safe-area-inset-bottom); /* 兼容 iOS < 11.2 */
+  height: env(safe-area-inset-bottom); /* 兼容 iOS >= 11.2 */
 }
 
 //省略号
-@mixin common_ellipsis($params:1) {
-    overflow: hidden;
-    display: -webkit-box;
-    white-space:normal; 
-    text-overflow:ellipsis;
-    word-break:break-all;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: $params;
-    
-    
+@mixin common_ellipsis($params: 1) {
+  overflow: hidden;
+  display: -webkit-box;
+  white-space: normal;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $params;
 }
-
-
