@@ -4,13 +4,38 @@
  * @param {*} delay
  * @returns
  */
-export const debounce = (fn, delay) => {
-  let timer: any = null
-  return (...param) => {
-    if (timer) clearTimeout(timer)
+export const debounce = (fn: () => void, wait: number, immediate: boolean) => {
+  let timer
+  let now = 0
+  let context: any
+  let argms: any[]
+
+  const run = timerInterval => {
     timer = setTimeout(() => {
-      fn(...param)
-    }, delay)
+      const interval = Date.now() - now
+      if (interval < timerInterval) {
+        now = +new Date()
+        run(timerInterval)
+      } else {
+        if (!immediate) {
+          fn.apply(context, argms)
+        }
+        clearTimeout(timer)
+        timer = null
+      }
+    }, timerInterval)
+  }
+
+  return function (...args: any[]) {
+    context = this
+    argms = args
+    now = +new Date()
+    if (!timer) {
+      if (immediate) {
+        fn.apply(context, argms)
+      }
+      run(wait)
+    }
   }
 }
 
@@ -42,7 +67,7 @@ export const getFilterData = (val = {}, arr: string[] = []) => {
   for (let key in val) {
     if (val[key] !== undefined && val[key] !== null && val[key] !== '' && !arr.includes(key)) {
       if (typeof val[key] == 'number') {
-        if (!isNaN(val[key])) {
+        if (!Number.isNaN(val[key])) {
           res[key] = val[key]
         }
       } else {
