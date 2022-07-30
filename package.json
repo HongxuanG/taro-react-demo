@@ -33,7 +33,7 @@
     "format:all": "npm-run-all -p prettier:fix -s eslint:fix"
   },
   "lint-staged": {
-    "*.{css,sass,scss,ts,jsx,tsx}": [
+    "*.{ts,jsx,tsx}": [
       "prettier --config .prettierrc.json --write",
       "eslint --fix --ext ./**/*.{ts,jsx,tsx}"
     ],

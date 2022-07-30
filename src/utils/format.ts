@@ -124,7 +124,7 @@ export const formatMillionYuan = (num, digit = 10000) => {
  */
 export const toDecimal2 = x => {
   var f = parseFloat(x)
-  if (isNaN(f)) {
+  if (Number.isNaN(f)) {
     return 0
   }
   let stringifyF = String(f)

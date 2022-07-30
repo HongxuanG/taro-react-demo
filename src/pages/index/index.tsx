@@ -1,11 +1,7 @@
-import { View, Text } from '@tarojs/components'
+import UploadImage from '@/components/uploadImage'
 import './index.scss'
 
 const Index = props => {
-  return (
-    <View>
-      <Text>Hello world!</Text>
-    </View>
-  )
+  return <UploadImage />
 }
 export default Index
