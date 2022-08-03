@@ -30,7 +30,8 @@
     "eslint": "eslint ./ --ext .{ts,jsx,tsx}",
     "eslint:fix": "eslint --fix --ext ./**/*.{ts,jsx,tsx}",
     "prettier:fix": "prettier --config .prettierrc.json --write ./**/*.{json,css,sass,scss,ts,jsx,tsx}",
-    "format:all": "npm-run-all -p prettier:fix -s eslint:fix"
+    "format:all": "npm-run-all -p prettier:fix -s eslint:fix",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,jsx,tsx}": [
