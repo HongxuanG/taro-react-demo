@@ -4,7 +4,7 @@ import useUploadCDNImg from '@/composables/useUploadImage'
 import { Image, Text, View } from '@tarojs/components'
 import { formatImgUrl } from '@/utils/format'
 import classnames from 'classnames'
-import styles from './index.scss'
+import styles from './index.module.scss'
 
 //图片列表
 type ImageParam = {
@@ -24,13 +24,13 @@ const PictureItem: FC<ImageParam> = memo(({ onChange, defaultList, onlyRead = fa
   const uploadImage = async () => {
     let list: any = await getWxPhoto('after-sale', 5)
     let images: any[] = []
-    list?.map(item => {
+    list?.map((item: any) => {
       images.push(item.url)
     })
     setImageLise([...imageList, ...images])
   }
   //删除图片
-  const delImage = index => {
+  const delImage = (index: any) => {
     imageList.splice(index, 1)
     setImageLise(() => [...imageList])
   }
@@ -54,7 +54,7 @@ const PictureItem: FC<ImageParam> = memo(({ onChange, defaultList, onlyRead = fa
     <View className={styles.image_main}>
       {imageList?.map((item, index) => (
         <View className={styles.ImgItem} key={item + index}>
-          <Image mode='aspectFill' src={formatImgUrl(item)} onClick={showImage}></Image>
+          <Image mode="aspectFill" src={formatImgUrl(item)} onClick={showImage}></Image>
           {!onlyRead && (
             <View
               onClick={() => delImage(index)}

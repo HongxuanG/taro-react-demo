@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 
 const Checkbox = () => {
-  return <View></View>
+  return <View ></View>
 }
 
 export default Checkbox

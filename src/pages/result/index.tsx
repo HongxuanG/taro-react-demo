@@ -1,9 +1,9 @@
 import { View, Text } from '@tarojs/components'
-import './index.scss'
+import './index.module.scss'
 
 const Result = () => {
   return (
-    <View className='result'>
+    <View className="result">
       <Text>Result</Text>
     </View>
   )
