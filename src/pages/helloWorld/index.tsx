@@ -26,6 +26,7 @@ const HelloWorld = () => {
   //   // 第二个参数作为数组，可以实现性能优化，count不变的时候可以跳过执行effect
   // }, [count])
 
+  // 以下effect会报错，因为useEffect不能在条件中使用
   // if (count % 2 === 0) {
   //   useEffect(() => {
   //     console.log('useEffect triggered', count)
@@ -54,15 +55,14 @@ const HelloWorld = () => {
     console.log(inputRef.current)
   }
 
-
   return (
     <View>
       <View>count: {count}</View>
       <View>effect: {effect}</View>
-      <Button size="mini" onClick={handleCount}>
+      <Button size='mini' onClick={handleCount}>
         更新count
       </Button>
-      <Input ref={inputRef} type="text" ></Input>
+      <Input ref={inputRef} type='text'></Input>
       <Button onClick={handleSubmit}>提交</Button>
       <Button onClick={handleNavite}>跳转到history</Button>
     </View>
