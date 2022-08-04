@@ -4,7 +4,7 @@ import useUploadCDNImg from '@/composables/useUploadImage'
 import { Image, Text, View } from '@tarojs/components'
 import { formatImgUrl } from '@/utils/format'
 import classnames from 'classnames'
-import styles from './index.scss'
+import styles from './index.module.scss'
 
 //图片列表
 type ImageParam = {
@@ -24,13 +24,13 @@ const PictureItem: FC<ImageParam> = memo(({ onChange, defaultList, onlyRead = fa
   const uploadImage = async () => {
     let list: any = await getWxPhoto('after-sale', 5)
     let images: any[] = []
-    list?.map(item => {
+    list?.map((item: any) => {
       images.push(item.url)
     })
     setImageLise([...imageList, ...images])
   }
   //删除图片
-  const delImage = index => {
+  const delImage = (index: number) => {
     imageList.splice(index, 1)
     setImageLise(() => [...imageList])
   }
@@ -49,6 +49,7 @@ const PictureItem: FC<ImageParam> = memo(({ onChange, defaultList, onlyRead = fa
       urls: list // 需要预览的图片http链接列表
     })
   }
+  console.log('styles==>', styles)
 
   return (
     <View className={styles.image_main}>
@@ -58,14 +59,14 @@ const PictureItem: FC<ImageParam> = memo(({ onChange, defaultList, onlyRead = fa
           {!onlyRead && (
             <View
               onClick={() => delImage(index)}
-              className={classnames(styles.miconfont_close, 'iconfont icon-qingkong')}
+              className={classnames(styles.miconfont_close, 'iconfont icon-delete')}
             ></View>
           )}
         </View>
       ))}
       {!onlyRead && (
         <View className={styles.uploadImg} onClick={uploadImage}>
-          <Text className={classnames(styles.miconfont, 'iconfont icon-saomazhifu')}></Text>
+          <Text className={classnames(styles.miconfont, 'iconfont icon-saomazhifu_huaban')}></Text>
           <Text className={styles.uploadText}>上传照片</Text>
         </View>
       )}
