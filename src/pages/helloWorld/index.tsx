@@ -1,9 +1,14 @@
-import { View, Input, Button } from '@tarojs/components'
+import A from '@/components/A'
+import { useDebounce } from '@/composables/common'
+import { View, Input, Button, InputProps, CommonEventFunction } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { AContext, defaultAValue } from './context'
+import styles from './index.module.scss'
 
-const HelloWorld = () => {
-  const [count, setCount] = useState(0)
+const HelloWorld: React.FC = () => {
+  const [count, setCount] = useState(5)
+  const [count2, setCount2] = useState(6)
   const handleCount = () => {
     setCount(count)
   }
@@ -38,33 +43,73 @@ const HelloWorld = () => {
   //     // 第二个参数作为数组，可以实现性能优化，count不变的时候可以跳过执行effect
   //   }, [count])
   // }
-  useEffect(() => {
-    const id = setInterval(() => {
-      setCount(c => c + 1)
-      console.log('setCount')
-    }, 1000)
-    return () => {
-      console.log('clearInterval')
-      clearInterval(id)
-    }
-  }, [])
 
-  const inputRef = React.createRef()
+  const debounceCount = useDebounce(count, 2000)
+  useEffect(() => {
+    console.log('setCount', debounceCount)
+  }, [debounceCount])
+
+  const inputRef = useRef()
 
   const handleSubmit = () => {
     console.log(inputRef.current)
   }
 
+  const handleInput = (event: any) => {
+    console.log(event.detail.value)
+    setCount(Number(event.detail.value))
+  }
+
+  const handleCountPlus = () => {
+    setCount(count + 1)
+  }
+  const handleCountSub = () => {
+    setCount(count - 1)
+  }
+
+  const [total, setTotal] = useState(() => {
+    return count + count2
+  })
+
+  useEffect(() => {
+    setTotal(() => {
+      return count + count2
+    })
+  }, [total, count, count2])
   return (
     <View>
       <View>count: {count}</View>
+      <View>count2: {count2}</View>
+      <View>total: {total}</View>
       <View>effect: {effect}</View>
-      <Button size='mini' onClick={handleCount}>
-        更新count
-      </Button>
-      <Input ref={inputRef} type='text'></Input>
+      <View>
+        <Button size='mini' onClick={handleCountPlus}>
+          count1 + 1
+        </Button>
+        <Button size='mini' onClick={handleCountSub}>
+          count1 - 1
+        </Button>
+      </View>
+      <View>
+        <Button size='mini' onClick={() => setCount2(count2 + 1)}>
+          count2 + 1
+        </Button>
+        <Button size='mini' onClick={() => setCount2(count2 - 1)}>
+          count2 - 1
+        </Button>
+      </View>
+      <Input
+        ref={inputRef}
+        type='text'
+        className={styles['input-class']}
+        placeholder='测试防抖hooks'
+        onInput={handleInput}
+      ></Input>
       <Button onClick={handleSubmit}>提交</Button>
       <Button onClick={handleNavite}>跳转到history</Button>
+      <AContext.Provider value={defaultAValue}>
+        <A></A>
+      </AContext.Provider>
     </View>
   )
 }

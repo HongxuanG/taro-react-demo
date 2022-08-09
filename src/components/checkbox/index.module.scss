@@ -1,0 +1,36 @@
+$sizeList: (
+  mini: 34rpx,
+  normal: 48rpx,
+  large: 62rpx
+);
+
+$defaultSize: 'normal';
+
+.checkbox {
+  width: map-get($map: $sizeList, $key: $defaultSize);
+  height: map-get($map: $sizeList, $key: $defaultSize);
+  line-height: map-get($map: $sizeList, $key: $defaultSize);
+  border-radius: 50%;
+  border: 1px solid #c2c2c2;
+  background-color: #fff;
+  @each $sizename, $size in $sizeList {
+    &__#{$sizename}-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      text-align: center;
+      line-height: inherit;
+      font-size: $size - 12rpx;
+      background-color: #297fff;
+      color: #fff;
+    }
+  }
+}
+.checkbox__size {
+  @each $sizename, $size in $sizeList {
+    &-#{$sizename} {
+      width: $size;
+      height: $size;
+    }
+  }
+}

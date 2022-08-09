@@ -1,7 +1,7 @@
 export default defineAppConfig({
   pages: [
-    'pages/helloWorld/index',
     'pages/index/index',
+    'pages/helloWorld/index',
     'pages/history/index',
     'pages/result/index'
   ],

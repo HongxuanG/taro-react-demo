@@ -4,14 +4,14 @@
  * @param {*} delay
  * @returns
  */
-export const debounce = (fn: () => void, wait: number, immediate: boolean) => {
-  let timer
+export const debounce = (fn: (...args: any[]) => void, wait: number, immediate: boolean) => {
+  let timer: number | null
   let now = 0
   let context: any
   let argms: any[]
 
-  const run = timerInterval => {
-    timer = setTimeout(() => {
+  const run = (timerInterval: number) => {
+    timer = window.setTimeout(() => {
       const interval = Date.now() - now
       if (interval < timerInterval) {
         now = +new Date()
@@ -20,7 +20,7 @@ export const debounce = (fn: () => void, wait: number, immediate: boolean) => {
         if (!immediate) {
           fn.apply(context, argms)
         }
-        clearTimeout(timer)
+        clearTimeout(timer as number)
         timer = null
       }
     }, timerInterval)
@@ -45,9 +45,9 @@ export const debounce = (fn: () => void, wait: number, immediate: boolean) => {
  * @param {*} delay
  * @returns
  */
-export const throttle = (fn, delay) => {
+export const throttle = (fn: (...args: any[]) => any, delay: number) => {
   let pre = 0
-  return (...params) => {
+  return (...params: any[]) => {
     let now = new Date().getTime()
     if (now - pre > delay) {
       fn(...params)
@@ -62,8 +62,8 @@ export const throttle = (fn, delay) => {
  * @param {Array}  arr 排除过滤的属性
  * @returns
  */
-export const getFilterData = (val = {}, arr: string[] = []) => {
-  let res = {}
+export const getFilterData = (val: Record<string, any> = {}, arr: string[] = []) => {
+  let res: Record<string, any> = {}
   for (let key in val) {
     if (val[key] !== undefined && val[key] !== null && val[key] !== '' && !arr.includes(key)) {
       if (typeof val[key] == 'number') {
@@ -77,25 +77,26 @@ export const getFilterData = (val = {}, arr: string[] = []) => {
   }
   return res
 }
+type CopyObjectParams = Record<string, any> | Array<any>
 /**
  * 对象深拷贝
  * @param {*} object
  * @returns
  */
-export const copyObject = object => {
-  if (object.constructor == Object) {
+export const copyObject = (object: CopyObjectParams): CopyObjectParams => {
+  if (Object.prototype.toString.call(object) === '[object Object]') {
     let keys = Object.keys(object)
-    let newObject = {}
+    let newObject: Record<string, any> = {}
     keys.map(key => {
-      newObject[key] = copyObject(object[key])
+      newObject[key] = copyObject((object as Record<string, any>)[key])
     })
-    return newObject
+    return newObject as Record<string, any>
   } else if (object.constructor == Array) {
-    return object.map(item => {
+    return object.map((item: any) => {
       return copyObject(item)
-    })
+    }) as Array<any>
   } else {
-    return object
+    return object as any
   }
 }
 
@@ -111,27 +112,6 @@ export const copyObject = object => {
     !wh400
     !w600
  */
-export const screenshot = (url, suffix = '!w200') => {
+export const screenshot = (url: string, suffix = '!w200') => {
   return url + suffix
-}
-
-//获取数据加载状态 //0:数据从无到有加载数据，1，没有任何数据， 2：下拉加载，3：下拉没有数据
-export const dataLoadingStatus = ({
-  list = [],
-  total = 0,
-  status = false
-}: {
-  list: any[]
-  total: number
-  status: true | false
-}) => {
-  if (list.length == 0 && status) {
-    return 0
-  } else if (list.length == 0 && !status) {
-    return 1
-  } else if (list.length < total) {
-    return 2
-  } else {
-    return 3
-  }
 }
