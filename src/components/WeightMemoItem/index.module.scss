@@ -1,0 +1,20 @@
+.item-container {
+  margin: 20rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  .item-image {
+    width: 100px;
+    height: 100px;
+    padding: 5rpx;
+  }
+  .item-context {
+    margin-left: 10px;
+    .item-title {
+      font-size: 40rpx;
+      font-weight: bold;
+    }
+    .item-desc {
+      font-size: 32rpx;
+    }
+  }
+}
